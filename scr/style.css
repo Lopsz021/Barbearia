@@ -1,0 +1,168 @@
+/*PAGINA DE LOGIN ----------------------------------------*/
+
+.bodylog {
+   
+    background: url('imagens/image3.png') no-repeat center center fixed;
+    background-size: cover;
+
+    font-family: 'Georgia', serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0; 
+}
+
+.container {      
+    background-position: center;    
+    background-repeat: no-repeat;       
+    position: relative;
+    width: 800px;
+    padding: 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);       
+    border: 5px solid rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    text-align: center;    
+    color: #fff;  
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 3em;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    margin-top: 20px;
+}
+
+.pedido, .carrinho {
+    background-color: rgb(94, 75, 75, 0.6);
+    border-radius: 10px;
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border: 2px solid #dcb07a;
+}
+
+button {
+    background-color: #504f4e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #875c36;
+    transform: scale(1.05);
+}
+
+input {
+    padding: 12px;
+    margin: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #4b3a3a;
+    color: #fff;
+    font-size: 1em;
+    text-transform: uppercase;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 2px solid #dcb07a;
+    border-radius: 5px;
+    background-color: #6e5757;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+li:hover {
+    background-color: #a97442;
+    color: #fff;
+    transform: scale(1.02);
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    z-index: 1000;
+}
+
+.emaillink {
+    color: rgb(5, 194, 219);
+}
+
+/*PAGINA DE RECUPERAR-SENHA -----------------------------*/
+
+.voltar {
+    position: top;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    z-index: 1000;
+}
+
+.bodyrec {
+    background: url('') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Georgia', serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0; 
+}
+
+.container2 {      
+    background-position: center;    
+    background-repeat: no-repeat;       
+    position: relative;
+    width: 800px;
+    padding: 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);       
+    border: 5px solid rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    text-align: center;    
+    color: #000000;  
+}
+
+
+.email2 {
+    background-color: white;
+    color: black;
+}
+.senha {
+    background-color: white;
+    color: black;
+}
