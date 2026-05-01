@@ -4,23 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barberia Lopsz</title>
-    <link rel="stylesheet" href="style.css"
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bodylog">
     
     <main class="container">
         <h1>BARBEARIA LOPSZ</h1>
 
+        <form action="/login" method="POST">
 
-        <input type="text" id="" placeholder="usuário">
+        <label for="usuemail">EMAIL :</label>
+        <input type="email" id="usuemail" name="email" autocomplete="off" readonly onfocus="this.removeAttribute('readonly'); this.value = this.value.toLowerCase()" 
+        oninput = "setTimeout(() => this.value = this.value.toLowerCase(),0)"
+        placeholder="exemplo@gmail.com"  
+        required>
         <br>
-        <input type="text" id="" placeholder="senha">
+        <label for="usuSenha">SENHA :</label>
+        <input type="password" id="usuSenha" name="senha" placeholder="INFORME SUA SENHA" required>
         <br>
         <br>
-        <button id="">Logar</button>
+        <button type="submit">Logar</button>
         <br>
         <br>
         <a href="recuperar-senha.html">esqueci minha senha</a>
+        <br>
+        <br>
+        <a href="criar-conta.html">Criar conta nova</a>
+        </form>
 
     </main>
 

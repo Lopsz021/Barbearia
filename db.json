@@ -1,4 +1,12 @@
 {
-    "agendamentos":[],
-    "usuarios": []
+  "usuarios": [
+    {
+      "email": "robson@gmail.com",
+      "senha": "$2b$10$8KIJ.JiowdDPllt4z1UgAuPOuelUeB9dL1LitmdgBM0v2DfwfClKK"
+    },
+    {
+      "email": "morena@gmail.com",
+      "senha": "$2b$10$C4KsVtO7bWXM8Ueza8KrJe6w76lGNVah/Pd9R1ubN1szdC68H73Em"
+    }
+  ]
 }

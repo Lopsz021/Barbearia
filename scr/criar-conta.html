@@ -13,9 +13,9 @@
     </header>
 
     <main class="container2">
-        <form action="/recuperar" method="POST">
+        <form action="/criar" method="POST">
         
-        <label for="email">EMAIL :</label>
+        <label for="usuemail">EMAIL :</label>
 
         <input type="email" id="usuemail" class="email2" name="email" autocomplete="off" readonly onfocus="this.removeAttribute('readonly'); this.value = this.value.toLowerCase()" 
         oninput = "setTimeout(() => this.value = this.value.toLowerCase(),0)"
@@ -23,7 +23,11 @@
         required>
 
         <br>
-        <button id="salvar-dados" type="submit">Recuperar</button>
+        <label for="usuSenha">SENHA :</label>
+        <input type="password" id="usuSenha" class="criacao-senha" name="senha" placeholder="Informe sua nova senha" required>
+
+        <br>
+        <button id="salvar-dados" type="submit">Criar conta</button>
         </form>
     </main>
     
