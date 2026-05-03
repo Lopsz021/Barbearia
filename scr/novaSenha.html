@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Nova senha</title>
+</head>
+<body>
+
+  <form id="formNovaSenha" method="POST">
+
+    <input id="novaSenha" type="password" name="novaSenha" placeholder="Nova senha" required>
+
+    <button type="submit">Salvar nova senha</button>
+    <p id="mensagem"></p>
+  </form>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+
+    const form = document.getElementById('formNovaSenha');
+    const mensagem = document.getElementById('mensagem');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const novaSenha = document.getElementById('novaSenha').value;
+
+      const resposta = await fetch(`/resetar-senha/${token}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ novaSenha })
+      });
+
+      const texto = await resposta.text();
+
+      mensagem.textContent = texto;
+
+      if (resposta.ok) {
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2000);
+      }
+    });
+  </script>
+
+</body>
+</html>

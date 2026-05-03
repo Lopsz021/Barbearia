@@ -1,12 +1,1 @@
-{
-  "usuarios": [
-    {
-      "email": "robson@gmail.com",
-      "senha": "$2b$10$8KIJ.JiowdDPllt4z1UgAuPOuelUeB9dL1LitmdgBM0v2DfwfClKK"
-    },
-    {
-      "email": "morena@gmail.com",
-      "senha": "$2b$10$C4KsVtO7bWXM8Ueza8KrJe6w76lGNVah/Pd9R1ubN1szdC68H73Em"
-    }
-  ]
-}
+{"usuarios":[{"email":"robson@gmail.com","senha":"$2b$10$r259EHYm0X/weZ0YJ4VbTuY1A3RY.K4XwcPyk.gBpD4/VsjM4gC36","resetToken":null,"resetTokenExpira":null},{"email":"morena@gmail.com","senha":"$2b$10$C4KsVtO7bWXM8Ueza8KrJe6w76lGNVah/Pd9R1ubN1szdC68H73Em"},{"email":"joao1@gmail.com","senha":"$2b$10$W7ygTQrkGJHCSKaFt2eXEe2SiaLnqddZVzWhlZGxiyf45uhiSeRCi","resetToken":null,"resetTokenExpira":null}]}

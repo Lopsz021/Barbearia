@@ -1,4 +1,4 @@
-
+const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const path = require('path');
@@ -45,7 +45,9 @@ app.post('/criar', async (req, res) => {
     //5.Salvar no banco de dados
     await db.push("/usuarios[]", {
       email,
-      senha: senhaHash
+      senha: senhaHash,
+      resetToken: null,
+      resetTokenExpira: null
     });
 
     res.send("Conta criada com sucesso !");
@@ -57,7 +59,8 @@ app.post('/criar', async (req, res) => {
   });
 
 
-  // Login
+  // ================== Login ==========================
+
 app.post("/login", async (req, res) => {
   const {email, senha} = req.body;
 
@@ -84,54 +87,68 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Rota para registrar um usuário
-app.post('/registrar', async (req, res) => {
-  const { email, senha } = req.body;
+//================= RECUPERAR SENHA ==========================
 
-  if(!email || !senha) {
-    return res.status(400).send('Dados invalidos!');
-  }
+app.post('/recuperar', async(req, res) => {
+  const {email} = req.body;
 
+  try{
+    const usuarios = await db.getData("/usuarios");
 
-  try {
+    const indice = usuarios.findIndex(u => u.email === email);
 
-    const usuarios = db.getData("/usuarios");
+    if(indice === -1) {
+      return res.status(400).send("Usuário não encontado");
+    }
 
-    const existe = usuarios.find(u => u.email === email);
+    const token = crypto.randomBytes(32).toString('hex');
+    const expira = Date.now() + 10 * 60 * 1000;
+    
+    usuarios[indice].resetToken = token;
+    usuarios[indice].resetTokenExpira = expira;
 
-    if (existe) {
-    return res.status(400).send("Email já cadastrado!");
-    };
+    await db.push('/usuarios', usuarios);
 
-    const senhaHash = await bcrypt.hash(senha,10);
-    await db.push(`/usuarios[]`, { email, senha: senhaHash });
-    res.send('Usuário registrado!');
-  } catch (error) {
-    res.status(500).send('Erro ao salvar.');
-  }
+    console.log('enviando JSON:', {token});
+    res.json({ token });
+
+    }catch(error){
+      console.error(error)
+      res.status(500).send("Erro ao gerar token");
+    }
 });
 
-app.post('/salvar', async (req, res) => {
-  const dadosParaSalvar = req.body;
-  console.log('Dados recebidos:', dadosParaSalvar);
+// ============ RESETAR SENHA COM TOKEN ====================
+app.post('/resetar-senha/:token', async (req, res) => {
+  const{token} = req.params;
+  const{novaSenha} = req.body;
 
-  if(!dadosParaSalvar.emails){
-    return res.status(400).send('Dados invalidos !');
-  }
   try {
-    await db.push("/emails[]", dadosParaSalvar.emails);
-    res.send("Dados salvos com sucesso !")
-  } catch (error) {
-    res.status(500).send('Erros ao salvar dados')
-  }
-});
+    console.log('token recebido:', token);
+    const usuarios = await db.getData('/usuarios');
+    console.log('tokens no banco:', usuarios.map(u => u.resetToken));
 
-app.get('/ler', (req, res)=>{
-  try {
-    const dados = db.getData("/emails");
-    res.json(dados)
+    const indice = usuarios.findIndex(u => u.resetToken === token && u.resetTokenExpira > Date.now());
+
+    if(indice === -1) {
+      return res.status(400).send('Token invalido ou expirado');
+    }
+
+    const senhaHash = await bcrypt.hash(novaSenha, 10);
+
+    usuarios[indice].senha = senhaHash;
+    usuarios[indice].resetToken = null;
+    usuarios[indice].resetTokenExpira = null;
+
+    await db.push('/usuarios', usuarios);
+
+    res.send('Senha alterada com sucesso !');
+
   } catch (error) {
-    res.status(500).send('Erro ao ler os dados')
+    console.error(error)
+    res.status(500).send('Erro ao redefinir senha');
   }
-});
+})
+
+
 app.listen(PORT, () => console.log(`Servidor rodando em http://localhost:${PORT}`));  

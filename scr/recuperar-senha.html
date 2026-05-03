@@ -13,7 +13,7 @@
     </header>
 
     <main class="container2">
-        <form action="/recuperar" method="POST">
+        <form id="formRecuperar">
         
         <label for="email">EMAIL :</label>
 
@@ -24,9 +24,48 @@
 
         <br>
         <button id="salvar-dados" type="submit">Recuperar</button>
+
+        <p id="mensagem"></p>
+
         </form>
     </main>
     
 
+    <script>
+    const form = document.getElementById('formRecuperar');
+    const mensagem = document.getElementById('mensagem');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        console.log('clicou')
+
+        const email = document.getElementById('usuemail').value;
+
+        const resposta = await fetch('/recuperar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email})
+        });
+
+        console.log('status', resposta.status);
+
+        if(!resposta.ok){
+            const texto = await resposta.text();
+            mensagem.textContent = texto;
+            return;
+        }
+
+        const texto = await resposta.text();
+
+        const dados = JSON.parse(texto);
+        window.location.href = `/novaSenha.html?token=${dados.token}`;
+        
+        
+    });
+</script>
 </body>
+
 </html>
