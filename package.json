@@ -15,6 +15,7 @@
     "cors": "^2.8.6",
     "crypto": "^1.0.1",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "knex": "^3.2.9",
     "node-json-db": "^2.6.0",
     "sqlite3": "^6.0.1"

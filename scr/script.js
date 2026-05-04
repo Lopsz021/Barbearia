@@ -1,16 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-/* 
-    const form = document.getElementById('form-login')
-
-    form.addEventListener('submit', async(event) => {
-        
-        //Impede de recarregar à página
-        event.preventDefault();
-        
-        const email = document.getElementById('usuemail');
-        const senha
-    })
-    */
     const botaoSalvar = document.getElementById('salvar-dados');
 
 
@@ -56,4 +44,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 });
+});
+
+// ================== LANDING-PAGE ===========================
+
+// ================ PRIMEIRO CARD INTERATIVO =================
+document.addEventListener('DOMContentLoaded', () => {
+  const card = document.getElementById('abrir-form');
+  const formulario = document.getElementById('formulario');
+
+  if (card && formulario) {
+    card.addEventListener('click', () => {
+      formulario.classList.toggle('escondido');
+    });
+  } else {
+    console.error('Elemento não encontrado: abrir-form ou formulario');
+  }
+});   
+
+// ========== SEGUNDO CARD INTERATIVO ========================
+document.addEventListener('DOMContentLoaded', () => {
+  const card2 = document.getElementById('visualizar');
+  const form = document.getElementById('dados-visu');
+
+  if(card2 && form) {
+    card2.addEventListener('click', () => {
+      form.classList.toggle('escondido');
+    });
+  }else {
+    console.error('Dados não encontrados');
+  }
 })

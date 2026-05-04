@@ -1,3 +1,4 @@
+const session = require('express-session');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const express = require('express');
@@ -5,6 +6,20 @@ const path = require('path');
 const { JsonDB, Config } = require('node-json-db');
 const app = express();
 const PORT = 3000;
+
+// Barra a pagina qnd aperto pra voltar a ela na setinha
+//RESUMINDO NÃO FICA SALVO NO CACHE
+app.use((req, res, next) => {
+  res.setHeader("Cache-Control", 'no-store, no cache, must-revalidate, private');
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0")
+  next();
+});
+app.use(session({
+  secret: "barbearia_lopsz_secret",
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -15,7 +30,9 @@ app.get('/', (req, res) => {
 });
 
 // Serve arquivos estáticos (CSS, JS, etc.) da pasta 'scr'
-app.use(express.static('scr'));
+app.use(express.static('scr', {
+  index: false
+}));
 
 // Cria a instância do banco de dados
 const db = new JsonDB(new Config('db', true, false, '/'));
@@ -78,8 +95,8 @@ app.post("/login", async (req, res) => {
     if (!senhaCorreta) {
       return res.status(400).send("Senha Incorreta !");
     }
-
-    res.send("Login realizado com sucesso !!")
+    req.session.usuario = usuario;
+    res.redirect("/landing-page.html");
 
   } catch (error) {
     console.error(error)
@@ -148,7 +165,60 @@ app.post('/resetar-senha/:token', async (req, res) => {
     console.error(error)
     res.status(500).send('Erro ao redefinir senha');
   }
+});
+
+// =================== LOGOUT ===================
+
+app.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/login.html");
+  });
+});
+
+function auth(req, res, next) {
+  if(!req.session.usuario) {
+    return res.redirect("/login.html");
+  }
+  next();
+}
+
+app.get("/landing-page.html", auth, (req, res) => {
+  res.sendFile(__dirname + "/scr/landing-page.html");
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 app.listen(PORT, () => console.log(`Servidor rodando em http://localhost:${PORT}`));  

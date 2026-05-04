@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="avatar" onclick="toggleSidebar()">
+        <span>👤</span>
+    </nav>
+
+    <div id="sidebar" class="sidebar">
+        <a href="perfil.html">Perfil</a>
+        <a href="configuracoes.html">Configurações</a>
+        <a href="/logout">Sair</a>
+    </div>
+
+    <div id="overlay" onclick="toggleSidebar()"></div>
+
+    <main>
+
+        <div class="inicio">
+            <h1 class="bem-vindo">Bem-vindo ! 👋</h1>
+            
+            <p>Agende suas necessidade <br> de forma simples e rápida</p>
+        </div>
+        <br>
+        
+        <div class="card" id="abrir-form">
+            <div class="icone">+</div>    
+            <div class="conteudo">
+                <h3>Agendar</h3>
+                <p>preencha as infotmações <br> de forma facil e intuitiva</p>
+            </div>
+            <div class="seta"> > </div>
+        </div>
+
+        <form action="/agendar" id="formulario" class="escondido">
+            <input type="text" placeholder="Nome" >
+            <input type="date">
+            <input type="time">
+            <button type="submit">Agendar</button>
+        </form>
+
+        
+
+        <br>
+        <div class="card2" id="visualizar" >
+            <div class="icone2">📅</div>
+            <div class="conteudo">
+                <h3 class="black">Visualize seu agendamento</h3>
+                <p class="blackp">Aqui você pode visualizar <br> seus agendamentos</p>
+            </div>
+            <div class="seta2"> > </div>
+        </div>
+
+        <form id="dados-visu" class="escondido">
+            <p >DADOS</p>
+        </form>
+
+        <br>
+        <h2>Por que usar?</h2>
+
+        <div class="row">
+            <div class="item">
+                <div class="icone3">📱</div>
+                <p>interace simples <br> e intuitiva</p>
+            </div>
+
+            <div class="item">
+                <div class="icone4">🔒</div>
+                <p>informações protegidas <br>com segurança</p>
+            </div>
+
+            <div class="item">
+                <div class="icone5">🕑</div>
+                <p>Agende rapidamente</p>
+            </div>
+        </div>
+        
+            
+    </main>
+
+    <script src="script.js"></script>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
